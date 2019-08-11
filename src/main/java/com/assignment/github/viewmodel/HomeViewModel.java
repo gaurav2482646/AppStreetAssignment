@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.assignment.github.MainApp;
 import com.assignment.github.model.pojo.Project;
-import com.assignment.github.model.retrofit.Status;
+import com.assignment.github.model.retrofit.API;
 import com.assignment.github.repository.BaseRepository;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class HomeViewModel extends ViewModel {
-    public LiveData<Status> statusLiveData;
+    public LiveData<API.Status> statusLiveData;
     public LiveData<List<Project>> projectLiveData;
     @Inject
     public BaseRepository baseRepository;

@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.assignment.github.R;
 import com.assignment.github.adapter.ProjectAdapter;
 import com.assignment.github.model.pojo.Project;
-import com.assignment.github.model.retrofit.Status;
+import com.assignment.github.model.retrofit.API;
 import com.assignment.github.viewmodel.HomeViewModel;
 
 import java.util.List;
@@ -76,9 +76,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void observerStatus() {
-        viewModel.statusLiveData.observe(this, new Observer<Status>() {
+        viewModel.statusLiveData.observe(this, new Observer<API.Status>() {
             @Override
-            public void onChanged(@Nullable Status status) {
+            public void onChanged(@Nullable API.Status status) {
                 if (status != null) {
                     switch (status) {
                         case LOADED:

@@ -3,8 +3,8 @@ package com.assignment.github.repository;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.assignment.github.model.pojo.Project;
+import com.assignment.github.model.retrofit.API;
 import com.assignment.github.model.retrofit.RetroInterface;
-import com.assignment.github.model.retrofit.Status;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import retrofit2.Response;
 public class BaseRepository {
 
     private MutableLiveData<List<Project>> projectLiveData = new MutableLiveData<>();
-    private MutableLiveData<Status> statusLiveData = new MutableLiveData<>();
+    private MutableLiveData<API.Status> statusLiveData = new MutableLiveData<>();
     private RetroInterface mRetroInterface;
 
     @Inject
@@ -28,22 +28,22 @@ public class BaseRepository {
     }
 
     public void getProject() {
-        statusLiveData.setValue(Status.PROCESSING);
+        statusLiveData.setValue(API.Status.PROCESSING);
         mRetroInterface.getProjects().enqueue(new Callback<List<Project>>() {
             @Override
             public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
-                statusLiveData.setValue(Status.LOADED);
+                statusLiveData.setValue(API.Status.LOADED);
                 projectLiveData.setValue(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
-                statusLiveData.setValue(Status.FAILED);
+                statusLiveData.setValue(API.Status.FAILED);
             }
         });
     }
 
-    public MutableLiveData<Status> getStatus() {
+    public MutableLiveData<API.Status> getStatus() {
         return statusLiveData;
     }
 
